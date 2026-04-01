@@ -22,18 +22,27 @@ from src.config import (
     TRAIN_SUBSET_SIZE,
     TEST_SUBSET_SIZE,
     RUNS_DIR,
+    DOCS_DIR,
+    DATASET_ROOT,
     get_device,
     get_experiment_name,
 )
 from src.dataset import build_dataloaders
 from src.model import build_model
 from src.train import train_one_epoch, evaluate_on_test
-from src.utils import set_seed, create_run_dir, save_json, save_checkpoint
+from src.utils import (
+    set_seed,
+    create_run_dir,
+    save_json,
+    save_checkpoint,
+    append_experiment_log,
+)
 
 
 def main():
     set_seed(SEED)
     device = get_device()
+    experiment_name = get_experiment_name()
 
     print("Building dataloaders...")
     full_dataset, train_loader, test_loader = build_dataloaders()
@@ -72,10 +81,9 @@ def main():
 
     print(f"test_loss={test_loss:.4f} | test_acc={test_acc:.4f}")
 
-    experiment_name = get_experiment_name()
-    # create run folder
     run_dir = create_run_dir(RUNS_DIR, MODEL_NAME, experiment_name)
-
+    run_id = run_dir.name
+    
     # save config snapshot
     config_data = {
         "model_name": MODEL_NAME,
@@ -96,6 +104,9 @@ def main():
         "classes": full_dataset.classes,
         "train_samples": len(train_loader.dataset),
         "test_samples": len(test_loader.dataset),
+        "dataset_root": str(DATASET_ROOT),
+        "run_dir": str(run_dir),
+        "experiment_name": experiment_name,
     }
 
     # save metrics
@@ -110,7 +121,16 @@ def main():
     save_json(run_dir / "metrics.json", metrics_data)
     save_checkpoint(run_dir / "model.pth", model)
 
+    append_experiment_log(
+        DOCS_DIR / "experiment-log.md",
+        run_id,
+        experiment_name,
+        config_data,
+        metrics_data,
+    )
+
     print(f"Saved outputs to: {run_dir}")
+    print(f"Updated experiment log: {DOCS_DIR / 'experiment-log.md'}")
 
 
 if __name__ == "__main__":
