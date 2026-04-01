@@ -23,6 +23,8 @@ def main():
 
     print("Classes:", full_dataset.classes)
     print("Number of classes:", len(full_dataset.classes))
+    print("Train samples:", len(train_loader.dataset))
+    print("Val samples:", len(val_loader.dataset))
     print("Device:", device)
 
     print("Building model...")

@@ -21,6 +21,10 @@ OUTPUT_DIR = PROJECT_ROOT / "outputs"
 CHECKPOINT_DIR = OUTPUT_DIR / "checkpoints"
 LOG_DIR = OUTPUT_DIR / "logs"
 
+# SMOKE TEST
+USE_SUBSET = True # TODO: CHANGE IT TO FALSE WHEN REAL TRAIN
+TRAIN_SUBSET_SIZE = 2000
+VAL_SUBSET_SIZE = 500
 
 def get_device() -> str:
     import torch

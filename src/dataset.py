@@ -1,6 +1,6 @@
-from torch.utils.data import DataLoader, random_split
-from torchvision import datasets, transforms
 import torch
+from torch.utils.data import DataLoader, random_split, Subset
+from torchvision import datasets, transforms
 
 from src.config import (
     DATASET_ROOT,
@@ -9,6 +9,9 @@ from src.config import (
     BATCH_SIZE,
     NUM_WORKERS,
     SEED,
+    USE_SUBSET,
+    TRAIN_SUBSET_SIZE,
+    VAL_SUBSET_SIZE,
 )
 
 
@@ -17,6 +20,22 @@ def build_transforms():
         transforms.Resize((IMG_SIZE, IMG_SIZE)),
         transforms.ToTensor(),
     ])
+
+
+def apply_subset_if_needed(train_dataset, val_dataset):
+    if not USE_SUBSET:
+        return train_dataset, val_dataset
+
+    train_limit = min(TRAIN_SUBSET_SIZE, len(train_dataset))
+    val_limit = min(VAL_SUBSET_SIZE, len(val_dataset))
+
+    train_indices = list(range(train_limit))
+    val_indices = list(range(val_limit))
+
+    train_dataset = Subset(train_dataset, train_indices)
+    val_dataset = Subset(val_dataset, val_indices)
+
+    return train_dataset, val_dataset
 
 
 def build_datasets():
@@ -33,6 +52,8 @@ def build_datasets():
         [train_size, val_size],
         generator=generator,
     )
+
+    train_dataset, val_dataset = apply_subset_if_needed(train_dataset, val_dataset)
 
     return full_dataset, train_dataset, val_dataset
 
