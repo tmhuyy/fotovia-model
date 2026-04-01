@@ -4,7 +4,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 DATASET_ROOT = Path(r"E:\dataset")
 
-MODEL_NAME = "resnext"
+MODEL_NAME = "resnet18"
 NUM_CLASSES = 10
 
 EPOCHS = 1
@@ -23,8 +23,8 @@ LOG_DIR = OUTPUT_DIR / "logs"
 
 # SMOKE TEST
 USE_SUBSET = True # TODO: CHANGE IT TO FALSE WHEN REAL TRAIN
-TRAIN_SUBSET_SIZE = 2000
-VAL_SUBSET_SIZE = 500
+TRAIN_SUBSET_SIZE = 70
+TEST_SUBSET_SIZE = 30
 
 def get_device() -> str:
     import torch

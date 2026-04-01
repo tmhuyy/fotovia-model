@@ -1,5 +1,6 @@
 import torch
-from torch.utils.data import DataLoader, random_split, Subset
+from sklearn.model_selection import train_test_split
+from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, transforms
 
 from src.config import (
@@ -11,7 +12,7 @@ from src.config import (
     SEED,
     USE_SUBSET,
     TRAIN_SUBSET_SIZE,
-    VAL_SUBSET_SIZE,
+    TEST_SUBSET_SIZE,
 )
 
 
@@ -22,44 +23,47 @@ def build_transforms():
     ])
 
 
-def apply_subset_if_needed(train_dataset, val_dataset):
+def apply_subset_if_needed(train_dataset, test_dataset):
     if not USE_SUBSET:
-        return train_dataset, val_dataset
+        return train_dataset, test_dataset
 
     train_limit = min(TRAIN_SUBSET_SIZE, len(train_dataset))
-    val_limit = min(VAL_SUBSET_SIZE, len(val_dataset))
+    test_limit = min(TEST_SUBSET_SIZE, len(test_dataset))
 
     train_indices = list(range(train_limit))
-    val_indices = list(range(val_limit))
+    test_indices = list(range(test_limit))
 
     train_dataset = Subset(train_dataset, train_indices)
-    val_dataset = Subset(val_dataset, val_indices)
+    test_dataset = Subset(test_dataset, test_indices)
 
-    return train_dataset, val_dataset
+    return train_dataset, test_dataset
 
 
 def build_datasets():
     transform = build_transforms()
     full_dataset = datasets.ImageFolder(root=DATASET_ROOT, transform=transform)
 
-    train_size = int(len(full_dataset) * TRAIN_RATIO)
-    val_size = len(full_dataset) - train_size
+    indices = list(range(len(full_dataset)))
+    targets = full_dataset.targets
 
-    generator = torch.Generator().manual_seed(SEED)
-
-    train_dataset, val_dataset = random_split(
-        full_dataset,
-        [train_size, val_size],
-        generator=generator,
+    train_indices, test_indices = train_test_split(
+        indices,
+        train_size=TRAIN_RATIO,
+        random_state=SEED,
+        shuffle=True,
+        stratify=targets,
     )
 
-    train_dataset, val_dataset = apply_subset_if_needed(train_dataset, val_dataset)
+    train_dataset = Subset(full_dataset, train_indices)
+    test_dataset = Subset(full_dataset, test_indices)
 
-    return full_dataset, train_dataset, val_dataset
+    train_dataset, test_dataset = apply_subset_if_needed(train_dataset, test_dataset)
+
+    return full_dataset, train_dataset, test_dataset
 
 
 def build_dataloaders():
-    full_dataset, train_dataset, val_dataset = build_datasets()
+    full_dataset, train_dataset, test_dataset = build_datasets()
 
     train_loader = DataLoader(
         train_dataset,
@@ -68,11 +72,11 @@ def build_dataloaders():
         num_workers=NUM_WORKERS,
     )
 
-    val_loader = DataLoader(
-        val_dataset,
+    test_loader = DataLoader(
+        test_dataset,
         batch_size=BATCH_SIZE,
         shuffle=False,
         num_workers=NUM_WORKERS,
     )
 
-    return full_dataset, train_loader, val_loader
+    return full_dataset, train_loader, test_loader

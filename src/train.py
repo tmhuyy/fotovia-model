@@ -33,14 +33,14 @@ def train_one_epoch(model, loader, criterion, optimizer, device):
 
 
 @torch.no_grad()
-def validate_one_epoch(model, loader, criterion, device):
+def evaluate_on_test(model, loader, criterion, device):
     model.eval()
 
     running_loss = 0.0
     correct = 0
     total = 0
 
-    for images, labels in tqdm(loader, desc="Validation", leave=False):
+    for images, labels in tqdm(loader, desc="Testing", leave=False):
         images = images.to(device)
         labels = labels.to(device)
 
@@ -53,7 +53,7 @@ def validate_one_epoch(model, loader, criterion, device):
         correct += (preds == labels).sum().item()
         total += labels.size(0)
 
-    epoch_loss = running_loss / total if total > 0 else 0.0
-    epoch_acc = correct / total if total > 0 else 0.0
+    test_loss = running_loss / total if total > 0 else 0.0
+    test_acc = correct / total if total > 0 else 0.0
 
-    return epoch_loss, epoch_acc
+    return test_loss, test_acc
