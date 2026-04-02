@@ -2,19 +2,19 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-DATASET_ROOT = Path(r"E:\dataset")
+DATASET_ROOT = Path(r"D:\Huy_Feat\dataset")
 
 MODEL_NAME = "resnext"
 NUM_CLASSES = 10
 
 EPOCHS = 1
-BATCH_SIZE = 4
+BATCH_SIZE = 8
 IMG_SIZE = 224
 LR = 0.01
 MOMENTUM = 0.9
 TRAIN_RATIO = 0.7
 SEED = 42
-NUM_WORKERS = 0
+NUM_WORKERS = 2
 PRETRAINED = False
 
 OUTPUT_DIR = PROJECT_ROOT / "outputs"
@@ -24,7 +24,7 @@ RUNS_DIR = OUTPUT_DIR / "runs"
 DOCS_DIR = PROJECT_ROOT / "docs"
 
 ############ SMOKE TEST ###############
-USE_SUBSET = True # TODO: CHANGE IT TO FALSE WHEN REAL TRAIN
+USE_SUBSET = False # TODO: CHANGE IT TO FALSE WHEN REAL TRAIN
 TRAIN_SUBSET_SIZE = 70
 TEST_SUBSET_SIZE = 30
 CUSTOM_EXPERIMENT_NAME = None

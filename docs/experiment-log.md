@@ -116,3 +116,45 @@ This file is useful for:
 - tracking progress
 - comparing experiments
 - writing the thesis report later
+
+## 2026-04-02_060747_resnext_smoke
+
+- Date: 2026-04-02
+- Run ID: 2026-04-02_060747_resnext_smoke
+- Experiment Name: smoke
+- Purpose: smoke test
+
+### Model Setup
+- Model: resnext
+- Pretrained: False
+- Device: cpu
+- Epochs: 1
+- Batch Size: 4
+- Image Size: 224
+- Optimizer: SGD
+- Learning Rate: 0.01
+- Momentum: 0.9
+- Loss Function: CrossEntropyLoss
+
+### Dataset Setup
+- Dataset: E:\dataset
+- Number of Classes: 10
+- Split Strategy: stratified 70% train / 30% test
+- Train Samples: 70
+- Test Samples: 30
+- Subset Enabled: True
+- Train Subset Size: 70
+- Test Subset Size: 30
+
+### Results
+- Train Loss: 14.4999
+- Train Accuracy: 0.1286
+- Test Loss: 8555.0426
+- Test Accuracy: 0.0333
+
+### Notes
+- Output folder: D:\Huy_Feat\GitHub\fotovia-model\outputs\runs\2026-04-02_060747_resnext_smoke
+- Checkpoint file: model.pth
+- Auto-generated after training run.
+
+---
