@@ -158,3 +158,171 @@ This file is useful for:
 - Auto-generated after training run.
 
 ---
+
+## 2026-04-02_115313_resnext_full
+
+- Date: 2026-04-02
+- Run ID: 2026-04-02_115313_resnext_full
+- Experiment Name: full
+- Purpose: full training
+
+### Model Setup
+- Model: resnext
+- Pretrained: True
+- Device: cuda
+- Epochs: 1
+- Batch Size: 128
+- Image Size: 224
+- Optimizer: SGD
+- Learning Rate: 0.01
+- Momentum: 0.9
+- Loss Function: CrossEntropyLoss
+
+### Dataset Setup
+- Dataset: /workspace/fotovia-model/dataset/dataset
+- Number of Classes: 10
+- Split Strategy: stratified 70% train / 30% test
+- Train Samples: 693030
+- Test Samples: 297020
+- Subset Enabled: False
+- Train Subset Size: 5000
+- Test Subset Size: 2000
+
+### Results
+- Train Loss: 0.1120
+- Train Accuracy: 0.9578
+- Test Loss: 0.0905
+- Test Accuracy: 0.9629
+
+### Notes
+- Output folder: /workspace/fotovia-model/outputs/runs/2026-04-02_115313_resnext_full
+- Checkpoint file: model.pth
+- Auto-generated after training run.
+
+---
+
+## 2026-04-02_120024_resnet18_full
+
+- Date: 2026-04-02
+- Run ID: 2026-04-02_120024_resnet18_full
+- Experiment Name: full
+- Purpose: full training
+
+### Model Setup
+- Model: resnet18
+- Pretrained: True
+- Device: cuda
+- Epochs: 1
+- Batch Size: 128
+- Image Size: 224
+- Optimizer: SGD
+- Learning Rate: 0.01
+- Momentum: 0.9
+- Loss Function: CrossEntropyLoss
+
+### Dataset Setup
+- Dataset: /workspace/fotovia-model/dataset/dataset
+- Number of Classes: 10
+- Split Strategy: stratified 70% train / 30% test
+- Train Samples: 693030
+- Test Samples: 297020
+- Subset Enabled: False
+- Train Subset Size: 5000
+- Test Subset Size: 2000
+
+### Results
+- Train Loss: 0.1222
+- Train Accuracy: 0.9556
+- Test Loss: 0.1004
+- Test Accuracy: 0.9602
+
+### Notes
+- Output folder: /workspace/fotovia-model/outputs/runs/2026-04-02_120024_resnet18_full
+- Checkpoint file: model.pth
+- Auto-generated after training run.
+
+---
+
+## 2026-04-02_123559_wide_resnet_full
+
+- Date: 2026-04-02
+- Run ID: 2026-04-02_123559_wide_resnet_full
+- Experiment Name: full
+- Purpose: full training
+
+### Model Setup
+- Model: wide_resnet
+- Pretrained: True
+- Device: cuda
+- Epochs: 1
+- Batch Size: 128
+- Image Size: 224
+- Optimizer: SGD
+- Learning Rate: 0.01
+- Momentum: 0.9
+- Loss Function: CrossEntropyLoss
+
+### Dataset Setup
+- Dataset: /workspace/fotovia-model/dataset/dataset
+- Number of Classes: 10
+- Split Strategy: stratified 70% train / 30% test
+- Train Samples: 693030
+- Test Samples: 297020
+- Subset Enabled: False
+- Train Subset Size: 5000
+- Test Subset Size: 2000
+
+### Results
+- Train Loss: 0.1119
+- Train Accuracy: 0.9580
+- Test Loss: 0.0917
+- Test Accuracy: 0.9631
+
+### Notes
+- Output folder: /workspace/fotovia-model/outputs/runs/2026-04-02_123559_wide_resnet_full
+- Checkpoint file: model.pth
+- Auto-generated after training run.
+
+---
+
+## 2026-04-02_124524_efficientnet_full
+
+- Date: 2026-04-02
+- Run ID: 2026-04-02_124524_efficientnet_full
+- Experiment Name: full
+- Purpose: full training
+
+### Model Setup
+- Model: efficientnet
+- Pretrained: True
+- Device: cuda
+- Epochs: 1
+- Batch Size: 128
+- Image Size: 224
+- Optimizer: SGD
+- Learning Rate: 0.01
+- Momentum: 0.9
+- Loss Function: CrossEntropyLoss
+
+### Dataset Setup
+- Dataset: /workspace/fotovia-model/dataset/dataset
+- Number of Classes: 10
+- Split Strategy: stratified 70% train / 30% test
+- Train Samples: 693030
+- Test Samples: 297020
+- Subset Enabled: False
+- Train Subset Size: 5000
+- Test Subset Size: 2000
+
+### Results
+- Train Loss: 0.1323
+- Train Accuracy: 0.9536
+- Test Loss: 0.0993
+- Test Accuracy: 0.9616
+
+### Notes
+- Output folder: /workspace/fotovia-model/outputs/runs/2026-04-02_124524_efficientnet_full
+- Checkpoint file: model.pth
+- Auto-generated after training run.
+
+---
